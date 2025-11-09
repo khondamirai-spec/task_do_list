@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 import { getSession, signOut, getUser } from '@/lib/auth';
 import { getProfile, hasProfile } from '@/lib/profile';
 import { getAvatarById } from '@/lib/avatars';
+import { AIChat } from '@/components/ai-chat';
 
 // Custom Date Picker Component
 function CustomDatePicker({ value, onChange, placeholder = "Select date" }: {
@@ -752,42 +753,7 @@ function HistoryPanel({ completedTasks, onClose, currentView }:{
   );
 }
 
-function AssistantPanel() {
-  return (
-    <aside className="card soft-border w-[360px] shrink-0 p-3 h-full flex flex-col">
-      <div className="flex items-start justify-between px-1">
-        <div>
-          <div className="font-semibold">AI Assist 🤖</div>
-          <div className="text-xs text-[--color-muted]">Knowledge, answers, ideas. One click away.</div>
-        </div>
-        <button className="btn-ghost size-8 rounded-full">×</button>
-      </div>
-
-      <div className="card soft-border mt-4 p-6 grow grid place-items-center text-center">
-        <div className="space-y-6">
-          <div className="text-sm text-[--color-muted]">Hi, Pristia</div>
-          <div className="text-2xl font-semibold">How can I help you?</div>
-          <div className="space-y-3">
-            {[
-              '"Can you help me with my first task?"',
-              '"Create a template for a product design doc"',
-              '"What is the SQL query for sorting by date?"',
-            ].map((t) => (
-              <button key={t} className="btn-ghost rounded-full px-4 py-2 soft-border bg-white w-full text-sm shadow-sm">{t}</button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-2 px-1">
-        <div className="flex-1">
-          <div className="soft-border rounded-xl bg-white px-3 py-2 text-sm text-[--color-muted]">Write something...</div>
-        </div>
-        <button className="btn btn-primary rounded-full size-10">→</button>
-      </div>
-    </aside>
-  );
-}
+// AssistantPanel is now replaced by AIChat component
 
 export default function AppPage() {
   const [activeMenu, setActiveMenu] = useState('Today');
@@ -1117,7 +1083,7 @@ export default function AppPage() {
             currentView={activeMenu} 
           />
         ) : (
-          <AssistantPanel />
+          <AIChat onClose={() => {}} />
         )}
       </div>
     </main>
