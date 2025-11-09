@@ -2,13 +2,18 @@
 
 /* App theme tokens approximating the screenshot */
 @theme {
-  --color-bg: #f2f2f2;
+  /* Slightly darker neutral background for more gray feel */
+  --color-bg: #ededf0;
   --color-card: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #0f0f12;
   --color-muted: #8c8c8f;
+  --color-muted-foreground: #6b7280;
   --color-primary: #6b6cf6; /* violet-ish */
   --color-primary-500: #6b6cf6;
   --color-primary-600: #5758e6;
   --color-accent: #111111;
+  --color-border: #e5e7eb;
   --radius-xl: 24px;
   --radius-lg: 16px;
   --radius-md: 12px;
@@ -24,22 +29,26 @@ body {
 }
 
 .card {
-  @apply rounded-[var(--radius-xl)] bg-[--color-card] shadow-sm;
-  box-shadow: 0 1px 0 rgba(15, 15, 18, 0.04), 0 10px 20px rgba(15, 15, 18, 0.04);
+  @apply rounded-[var(--radius-xl)] bg-white;
+  /* Clean white appearance without shadows */
+  position: relative;
+  overflow: hidden;
 }
 
+/* Clean white cards without any gradients or shadows */
+
 .soft-border {
-  border: 1px solid rgba(15,15,18,0.06);
+  border: 1px solid rgba(15,15,18,0.03);
 }
 
 .chip {
   @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium;
-  border: 1px solid rgba(15,15,18,0.06);
+  border: 1px solid rgba(15,15,18,0.03);
 }
 
 .btn {
   @apply inline-flex items-center justify-center gap-2 rounded-[10px] px-3.5 py-2 text-sm font-medium select-none;
-  border: 1px solid rgba(15,15,18,0.06);
+  border: 1px solid rgba(15,15,18,0.03);
 }
 
 .btn-primary {
@@ -63,3 +72,89 @@ body {
 *::-webkit-scrollbar { height: 10px; width: 10px; }
 *::-webkit-scrollbar-thumb { background: rgba(0,0,0,.08); border-radius: 999px; }
 *::-webkit-scrollbar-track { background: transparent; }
+
+/* Enhanced form styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+  color: #6b7280;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: #374151;
+}
+
+/* Focus states for better accessibility */
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Custom select styling */
+select {
+  background-image: none;
+}
+
+select:focus {
+  background-image: none;
+}
+
+/* Date picker positioning fixes */
+.date-picker-container {
+  position: relative;
+  z-index: 10;
+}
+
+.date-picker-dropdown {
+  position: fixed;
+  z-index: 9999;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: white;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Sidebar main menu items: clearer, higher contrast */
+.menu-item {
+  @apply w-full flex items-center gap-2 rounded-lg px-2 py-2 bg-white hover:bg-zinc-50;
+}
+
+.menu-item-label {
+  @apply text-left text-[14px] font-medium text-zinc-800;
+}
+
+.menu-item:hover .menu-item-label {
+  @apply text-zinc-900;
+}
+
+/* Task completion animation */
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(20px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-out {
+  animation: slide-out 1s ease-in-out forwards;
+}

@@ -1,0 +1,22 @@
+# Cursor-specific ignore file
+# Override .gitignore to allow working with env files in Cursor
+# (They will still be kept out of git for security)
+
+# Allow .env files in Cursor
+!.env*
+
+# Still ignore large directories
+node_modules/
+.next/
+
+
+
+
+
+
+
+
+
+
+
+
